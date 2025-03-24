@@ -13,14 +13,26 @@ const GendersTable = () => {
           <tr>
             <td>1</td>
             <td>Male</td>
+            <td>
+              <button className="btn btn-primary btn-sm me-1">Edit</button>
+              <button className="btn btn-danger btn-sm ml-2">Delete</button>
+            </td>
           </tr>
           <tr>
             <td>2</td>
             <td>Female</td>
+            <td>
+              <button className="btn btn-primary btn-sm me-1">Edit</button>
+              <button className="btn btn-danger btn-sm ml-2">Delete</button>
+            </td>
           </tr>
           <tr>
             <td>3</td>
             <td>Others</td>
+            <td>
+              <button className="btn btn-primary btn-sm me-1">Edit</button>
+              <button className="btn btn-danger btn-sm ml-2">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>
