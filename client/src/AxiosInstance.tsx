@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AxiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000",
+  baseURL: "http://127.0.0.1:8000/api",
 });
 
 AxiosInstance.interceptors.request.use((config) => {
@@ -25,7 +25,7 @@ AxiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status !== 422) {
+    if (error.response.status != 422) {
       console.error("Unexpected error: ", error);
     }
 
