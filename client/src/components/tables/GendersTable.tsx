@@ -75,9 +75,12 @@ const GendersTable = ({ refreshGenders }: GendersTableProps) => {
                     >
                       Edit
                     </Link>
-                    <button className="btn btn-danger btn-sm ml-2">
+                    <Link
+                      to={`/gender/delete/${gender.gender_id}`}
+                      className="btn btn-danger btn-sm ml-2"
+                    >
                       Delete
-                    </button>
+                    </Link>
                   </div>
                 </td>
               </tr>
