@@ -5,11 +5,18 @@ import AlertMessage from "../../AlertMessage";
 
 interface AddUserModalProps {
   showModal: boolean;
+  onRefreshUsers: (refresh: boolean) => void;
   onClose: () => void;
 }
 
-const AddUserModal = ({ showModal, onClose }: AddUserModalProps) => {
+const AddUserModal = ({
+  showModal,
+  onRefreshUsers,
+  onClose,
+}: AddUserModalProps) => {
   const submitFormRef = useRef<() => void | null>(null);
+
+  const [refreshUsers, setRefreshUsers] = useState(false);
   const [loadingStore, setLoadingStore] = useState(false);
 
   const [message, setMessage] = useState("");
@@ -56,9 +63,11 @@ const AddUserModal = ({ showModal, onClose }: AddUserModalProps) => {
               <AddUserForm
                 setSubmitForm={submitFormRef}
                 setLoadingStore={setLoadingStore}
-                onUserAdded={(message) =>
-                  handleShowAlertMessage(message, true, true)
-                }
+                onUserAdded={(message) => {
+                  handleShowAlertMessage(message, true, true);
+                  setRefreshUsers(!refreshUsers);
+                  onRefreshUsers(refreshUsers);
+                }}
               />
             </div>
             <div className="modal-footer">
@@ -68,11 +77,11 @@ const AddUserModal = ({ showModal, onClose }: AddUserModalProps) => {
                 onClick={onClose}
                 disabled={loadingStore}
               >
-                CLOSE
+                Close
               </button>
               <button
                 type="submit"
-                className="btn btn-success"
+                className="btn btn-primary"
                 disabled={loadingStore}
                 onClick={() => submitFormRef.current?.()}
               >
@@ -81,7 +90,7 @@ const AddUserModal = ({ showModal, onClose }: AddUserModalProps) => {
                     <SpinnerSmall /> Saving User...
                   </>
                 ) : (
-                  "SAVE USER"
+                  "Save User"
                 )}
               </button>
             </div>

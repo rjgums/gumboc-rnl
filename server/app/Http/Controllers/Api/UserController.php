@@ -9,6 +9,17 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    public function loadUsers()
+    {
+        $users = User::with(['gender'])
+            ->where('tbl_users.is_deleted', false)
+            ->get();
+
+        return response()->json([
+            'users' => $users
+        ], 200);
+    }
+
     public function storeUser(Request $request)
     {
         $validated = $request->validate([
@@ -20,8 +31,11 @@ class UserController extends Controller
             'gender' => ['required'],
             'address' => ['required'],
             'contact_number' => ['required'],
-            'email' => ['required', 'email',
-            Rule::unique('tbl_users', 'email')],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('tbl_users', 'email')
+            ],
             'password' => ['required', 'confirmed', 'min:8', 'max:15'],
             'password_confirmation' => ['required', 'min:8', 'max:15'],
         ]);
