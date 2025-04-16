@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import Users from "../../../interfaces/Users";
+import { Users } from "../../../interfaces/Users";
 import UserService from "../../../services/UserService";
 import ErrorHandler from "../../../handler/ErrorHandler";
 import Spinner from "../../Spinner";
 
 interface UsersTableProps {
   refreshUsers: boolean;
+  onEditUser: (user: Users) => void;
 }
 
-const UsersTable = ({ refreshUsers }: UsersTableProps) => {
+const UsersTable = ({ refreshUsers, onEditUser }: UsersTableProps) => {
   const [state, setState] = useState({
     loadingUsers: true,
     users: [] as Users[],
@@ -99,6 +100,7 @@ const UsersTable = ({ refreshUsers }: UsersTableProps) => {
                     <button
                       type="button"
                       className="btn btn-primary btn-sm me-1"
+                      onClick={() => onEditUser(user)}
                     >
                       Edit
                     </button>
