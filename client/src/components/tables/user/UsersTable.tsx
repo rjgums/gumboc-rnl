@@ -7,9 +7,14 @@ import Spinner from "../../Spinner";
 interface UsersTableProps {
   refreshUsers: boolean;
   onEditUser: (user: Users) => void;
+  onDeleteUser: (user: Users) => void;
 }
 
-const UsersTable = ({ refreshUsers, onEditUser }: UsersTableProps) => {
+const UsersTable = ({
+  refreshUsers,
+  onEditUser,
+  onDeleteUser,
+}: UsersTableProps) => {
   const [state, setState] = useState({
     loadingUsers: true,
     users: [] as Users[],
@@ -107,6 +112,7 @@ const UsersTable = ({ refreshUsers, onEditUser }: UsersTableProps) => {
                     <button
                       type="button"
                       className="btn btn-danger btn-sm ml-2"
+                      onClick={() => onDeleteUser(user)}
                     >
                       Delete
                     </button>
